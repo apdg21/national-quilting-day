@@ -556,21 +556,106 @@
             </div>
         </div>
         
-        <!-- Email reminder form -->
-        <div class="reminder-form">
-            <h3>Want a backup reminder?</h3>
-            <p style="color: #5d4037; margin-bottom: 30px;">We'll email you 1 hour before the reveal</p>
-            
-            <div class="form-group">
-                <input type="email" placeholder="Your email address" id="reminderEmail">
-            </div>
-            
-            <button class="btn-primary" id="sendReminder">Send me a reminder</button>
-            
-            <div class="form-note">
-                We respect your privacy. Unsubscribe at any time.
-            </div>
+        <!-- Fixed countdown timer section -->
+<div class="countdown-section" style="background: linear-gradient(135deg, #faf5f2 0%, #f7ede8 100%); border-radius: 30px; padding: 40px; margin-top: 60px; text-align: center;">
+    <h3 style="font-size: 28px; color: #5d4037; font-weight: 300; margin-bottom: 10px;">⏳ Time until the reveal</h3>
+    
+    <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap;">
+        <div style="background-color: white; border-radius: 20px; padding: 20px; min-width: 100px; box-shadow: 0 5px 15px rgba(93,64,55,0.05);">
+            <div style="font-size: 48px; font-weight: 300; color: #aa7e6f;" id="days">00</div>
+            <div style="color: #b49b94; font-size: 14px; letter-spacing: 2px;">DAYS</div>
         </div>
+        <div style="background-color: white; border-radius: 20px; padding: 20px; min-width: 100px; box-shadow: 0 5px 15px rgba(93,64,55,0.05);">
+            <div style="font-size: 48px; font-weight: 300; color: #aa7e6f;" id="hours">00</div>
+            <div style="color: #b49b94; font-size: 14px; letter-spacing: 2px;">HOURS</div>
+        </div>
+        <div style="background-color: white; border-radius: 20px; padding: 20px; min-width: 100px; box-shadow: 0 5px 15px rgba(93,64,55,0.05);">
+            <div style="font-size: 48px; font-weight: 300; color: #aa7e6f;" id="minutes">00</div>
+            <div style="color: #b49b94; font-size: 14px; letter-spacing: 2px;">MINUTES</div>
+        </div>
+        <div style="background-color: white; border-radius: 20px; padding: 20px; min-width: 100px; box-shadow: 0 5px 15px rgba(93,64,55,0.05);">
+            <div style="font-size: 48px; font-weight: 300; color: #aa7e6f;" id="seconds">00</div>
+            <div style="color: #b49b94; font-size: 14px; letter-spacing: 2px;">SECONDS</div>
+        </div>
+    </div>
+    
+    <p style="color: #5d4037; margin-top: 20px; font-size: 18px;" id="timezone-message"></p>
+    <p style="color: #aa7e6f; font-style: italic; margin-top: 10px;">Bookmark this page — we'll be live right here!</p>
+    
+    <script>
+        (function() {
+            // ✅ CORRECTED: Set reveal date to March 21, 2026 at 8:00 AM in YOUR timezone
+            // IMPORTANT: Change this to YOUR timezone!
+            
+            // OPTION 1: Use a specific timezone (RECOMMENDED)
+            // For Eastern Time (New York): 
+            // const revealDate = new Date('March 21, 2026 08:00:00 GMT-0400'); // EDT
+            // For Central Time (Chicago):
+            // const revealDate = new Date('March 21, 2026 08:00:00 GMT-0500'); // CDT
+            // For Mountain Time (Denver):
+            // const revealDate = new Date('March 21, 2026 08:00:00 GMT-0600'); // MDT
+            // For Pacific Time (Los Angeles):
+            // const revealDate = new Date('March 21, 2026 08:00:00 GMT-0700'); // PDT
+            // For UTC:
+            // const revealDate = new Date('March 21, 2026 08:00:00 GMT+0000');
+            
+            // OPTION 2: Use UTC and let the browser convert (simplest)
+            // March 21, 2026 8:00 AM UTC
+            // const revealDate = new Date(Date.UTC(2026, 2, 21, 8, 0, 0)); // Month is 0-indexed (2 = March)
+            
+            // OPTION 3: Set for Eastern Time (US) - adjust this to YOUR timezone
+            // This example sets it to 8:00 AM Eastern Time
+            const revealDate = new Date('March 21, 2026 08:00:00 GMT-0400'); // Eastern Daylight Time
+            
+            // Display the timezone to users
+            const timezoneDisplay = document.getElementById('timezone-message');
+            
+            // Get user's local timezone
+            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const localRevealTime = revealDate.toLocaleString('en-US', { 
+                timeZone: userTimeZone,
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long', 
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            });
+            
+            timezoneDisplay.innerHTML = `⏰ The reveal happens on <strong>${localRevealTime} (your local time)</strong>`;
+            
+            // Update countdown every second
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = revealDate.getTime() - now;
+                
+                // If reveal has passed
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.querySelector('.countdown-section').innerHTML = `
+                        <h3 style="font-size: 32px; color: #aa7e6f; margin-bottom: 20px;">🎉 IT'S REVEAL TIME! 🎉</h3>
+                        <p style="font-size: 20px; color: #5d4037; margin-bottom: 25px;">The Spring Edit 2026 is now live!</p>
+                        <a href="https://bohoblanket.com/spring-reveal" style="background-color: #aa7e6f; color: white; padding: 18px 40px; border-radius: 60px; text-decoration: none; font-size: 20px; font-weight: 500; display: inline-block; border: 2px solid #aa7e6f;">✨ VIEW THE COLLECTION ✨</a>
+                    `;
+                    return;
+                }
+                
+                // Time calculations
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Update display with leading zeros
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        })();
+    </script>
+</div>
         
         <!-- Back to email link -->
         <div class="back-link">
