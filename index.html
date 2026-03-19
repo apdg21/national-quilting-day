@@ -724,7 +724,7 @@
             
             // Get user's local time
             const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const localRevealTime = revealDate.toLocalPDTring('en-US', { 
+            const localRevealTime = revealDate.toLocaleString('en-US', { 
                 timeZone: userTimeZone,
                 weekday: 'long',
                 year: 'numeric',
@@ -757,7 +757,7 @@
                             <div class="social-grid" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
                                 <a href="#" class="social-btn social-facebook">f Share</a>
                                 <a href="#" class="social-btn social-twitter">𝕏 Post</a>
-                                <a href="#" class="social-btn social-pinterPDT">📌 Pin</a>
+                                <a href="#" class="social-btn social-pinterest">📌 Pin</a>
                             </div>
                         </div>
                     `;
@@ -875,7 +875,7 @@ END:VCALENDAR`;
             
             document.querySelector('.social-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
             document.querySelector('.social-twitter').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}`;
-            document.querySelector('.social-pinterPDT').href = `https://pinterPDT.com/pin/create/button/?url=${currentUrl}&description=${shareText}`;
+            document.querySelector('.social-pinterPDT').href = `https://pinterest.com/pin/create/button/?url=${currentUrl}&description=${shareText}`;
             document.querySelector('.social-email').href = `mailto:?subject=Boho%20Blanket%20Spring%20Reveal&body=${shareText}%20${currentUrl}`;
             
         })();
