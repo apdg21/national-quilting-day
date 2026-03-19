@@ -371,7 +371,7 @@
             color: white;
         }
         
-        .social-pinterest {
+        .social-pinterPDT {
             background-color: #BD081C;
             color: white;
         }
@@ -563,7 +563,7 @@
             <div class="date-badge">
                 <span class="day">March 21</span>
                 <span class="month">Saturday</span>
-                <span class="time">8:00 AM <span class="timezone">EST</span></span>
+                <span class="time">8:00 AM <span class="timezone">PDT</span></span>
             </div>
         </div>
         
@@ -619,7 +619,7 @@
             
             <div class="detail-row">
                 <div class="detail-label">Time</div>
-                <div class="detail-value">8:00 AM Eastern Time (converts to your local time)</div>
+                <div class="detail-value">8:00 AM Pacific Time (converts to your local time)</div>
             </div>
             
             <div class="detail-row">
@@ -630,7 +630,7 @@
             <div class="detail-row">
                 <div class="detail-label">Location</div>
                 <div class="detail-value">
-                    <a href="#">bohoblanket.com/collections/patterns</a> (link goes live at 8:00 AM EST)
+                    <a href="#">bohoblanket.com/collections/patterns</a> (link goes live at 8:00 AM PDT)
                 </div>
             </div>
             
@@ -680,7 +680,7 @@
                     <a href="#" class="social-btn social-twitter">
                         <span style="font-size: 20px;">𝕏</span> Post
                     </a>
-                    <a href="#" class="social-btn social-pinterest">
+                    <a href="#" class="social-btn social-pinterPDT">
                         <span style="font-size: 20px;">📌</span> Pin
                     </a>
                     <a href="#" class="social-btn social-email">
@@ -715,16 +715,16 @@
     
     <script>
         (function() {
-            // ✅ COUNTDOWN TIMER - Set to Eastern Time (change this if needed)
-            // March 21, 2026 at 8:00 AM Eastern Time
-            const revealDate = new Date('March 21, 2026 08:00:00 GMT-0400'); // EDT (Eastern Daylight Time)
+            // ✅ COUNTDOWN TIMER - Set to Pacific Time (change this if needed)
+            // March 21, 2026 at 8:00 AM Pacific Time
+            const revealDate = new Date('March 21, 2026 08:00:00 GMT-0700'); // PDT (Pacific Daylight Time)
             
             // Display timezone information
             const timezoneDisplay = document.getElementById('timezone-message');
             
             // Get user's local time
             const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const localRevealTime = revealDate.toLocaleString('en-US', { 
+            const localRevealTime = revealDate.toLocalPDTring('en-US', { 
                 timeZone: userTimeZone,
                 weekday: 'long',
                 year: 'numeric',
@@ -737,7 +737,7 @@
             
             timezoneDisplay.innerHTML = `
                 <strong>Your local time:</strong> ${localRevealTime}<br>
-                <span style="font-size: 13px; color: #b49b94;">(Reveal is 8:00 AM Eastern Time)</span>
+                <span style="font-size: 13px; color: #b49b94;">(Reveal is 8:00 AM Pacific Time)</span>
             `;
             
             // Update countdown every second
@@ -757,7 +757,7 @@
                             <div class="social-grid" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
                                 <a href="#" class="social-btn social-facebook">f Share</a>
                                 <a href="#" class="social-btn social-twitter">𝕏 Post</a>
-                                <a href="#" class="social-btn social-pinterest">📌 Pin</a>
+                                <a href="#" class="social-btn social-pinterPDT">📌 Pin</a>
                             </div>
                         </div>
                     `;
@@ -782,7 +782,7 @@
                 title: "Boho Blanket Spring Edit 2026 Reveal",
                 description: "Join us for the exclusive reveal of our 2026 Spring Edit, celebrating National Quilting Day. Be the first to see our new collection, featuring fresh patterns and limited-edition fabrics.\n\nLink goes live at reveal time: bohoblanket.com/collections/patterns",
                 location: "https://bohoblanket.com/collections/patterns",
-                startDate: "20260321T120000", // 8am EST = 12:00 UTC
+                startDate: "20260321T120000", // 8am PDT = 12:00 UTC
                 endDate: "20260321T130000", // 1 hour later
             };
             
@@ -871,11 +871,11 @@ END:VCALENDAR`;
             
             // Social sharing links (populate with actual URLs)
             const currentUrl = encodeURIComponent(window.location.href);
-            const shareText = encodeURIComponent("Don't miss the Boho Blanket Spring Edit 2026 Reveal on March 21 at 8am EST!");
+            const shareText = encodeURIComponent("Don't miss the Boho Blanket Spring Edit 2026 Reveal on March 21 at 8am PDT!");
             
             document.querySelector('.social-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
             document.querySelector('.social-twitter').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}`;
-            document.querySelector('.social-pinterest').href = `https://pinterest.com/pin/create/button/?url=${currentUrl}&description=${shareText}`;
+            document.querySelector('.social-pinterPDT').href = `https://pinterPDT.com/pin/create/button/?url=${currentUrl}&description=${shareText}`;
             document.querySelector('.social-email').href = `mailto:?subject=Boho%20Blanket%20Spring%20Reveal&body=${shareText}%20${currentUrl}`;
             
         })();
